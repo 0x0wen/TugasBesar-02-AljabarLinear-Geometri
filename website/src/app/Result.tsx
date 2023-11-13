@@ -10,9 +10,16 @@ import {Button} from '@mui/material'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import LoadingButton from '@mui/lab/LoadingButton'
 import car from '../../public/assets/car.jpg'
-const Result = () => {
+const Result = ({
+	onLoading,
+	resultData,
+}: {
+	onLoading: boolean
+	resultData: any
+}) => {
 	const [page, setPage] = useState(1)
 	const [isLoading, setIsLoading] = useState(false)
+	const itemsPerPage = 6
 	const loadingHandler = () => {
 		setIsLoading(!isLoading)
 	}
@@ -29,13 +36,20 @@ const Result = () => {
 		{id: 4, image: car, percentage: 0.5312},
 		{id: 5, image: car, percentage: 0.534},
 		{id: 6, image: car, percentage: 0.5456},
+		{id: 7, image: car, percentage: 0.5456},
 	]
+
+	const startIndex = (page - 1) * itemsPerPage
+	const endIndex = startIndex + itemsPerPage
+	const currentItems = dataResult.slice(startIndex, endIndex)
+	const totalPages = Math.ceil(dataResult.length / itemsPerPage)
+
 	return (
 		<section>
 			{/* result section */}
 			<section className="px-4 w-fit mx-auto flex flex-col gap-2 text-color1 font-montserrat shadow-md shadow-black p-5 rounded-xl">
 				<section>
-					{isLoading ? (
+					{onLoading ? (
 						<Box sx={{width: '100%'}}>
 							<LinearProgress />
 						</Box>
@@ -47,8 +61,8 @@ const Result = () => {
 					)}
 				</section>
 				<section className="grid grid-cols-2 md:grid-cols-3 gap-4 place-items-stretch w-fit mx-auto">
-					{dataResult.map((result) =>
-						isLoading ? (
+					{currentItems.map((result) =>
+						onLoading ? (
 							<Skeleton
 								variant="rectangular"
 								className="w-40 aspect-[4/3] h-auto sm:w-96"
@@ -60,15 +74,15 @@ const Result = () => {
 				</section>
 				<h3 className="text-center">Treshold {'>'} % similarity</h3>
 				<Pagination
-					count={(dataResult.length)/6}
-					className="justify-center"
+					count={totalPages}
+					className="mx-auto"
 					size="large"
 					page={page}
 					onChange={handlePageChange}
 				/>
 			</section>
 			<div className="flex justify-center mt-14 mb-20">
-				{isLoading ? (
+				{onLoading ? (
 					<LoadingButton
 						loading
 						loadingPosition="end"
