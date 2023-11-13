@@ -7,13 +7,33 @@ const videoConstraints = {
 	facingMode: 'environment',
 }
 
-const Camera = () => {
+const Camera = ({onSearch}: {onSearch: (image: any) => void}) => {
 	const webcamRef = useRef(null)
 	const [url, setUrl] = useState(null)
 	const [count, setCount] = useState(15)
 
+	function base64ToBlob(base64String: string, contentType = '') {
+		const byteCharacters = atob(base64String)
+		const byteNumbers = new Array(byteCharacters.length)
+
+		for (let i = 0; i < byteCharacters.length; i++) {
+			byteNumbers[i] = byteCharacters.charCodeAt(i)
+		}
+
+		const byteArray = new Uint8Array(byteNumbers)
+		return new Blob([byteArray], {type: contentType})
+	}
+
+	// Convert a Blob to a File
+	function blobToFile(blob: any, fileName: any) {
+		return new File([blob], fileName, {type: blob.type})
+	}
+
 	const capturePhoto = useCallback(async () => {
 		const imageSrc = webcamRef.current.getScreenshot()
+		const blob = base64ToBlob(imageSrc, 'image/webp') // Specify the image format
+		const file = blobToFile(blob, 'taken_by_webcam.webp') // Specify the file name
+		onSearch(file)
 		setUrl(imageSrc)
 	}, [webcamRef])
 	useEffect(() => {
@@ -34,10 +54,7 @@ const Camera = () => {
 	const onUserMedia = (e: any) => {
 		console.log(e)
 	}
-	const onRefresh = () => {
-		setUrl(null)
-		setCount(3)
-	}
+
 	return (
 		<div className=" w-fit">
 			<div className="relative">
@@ -50,13 +67,13 @@ const Camera = () => {
 					mirrored={true}
 					className="aspect-[4/3] w-80 sm:w-96 md:w-[28rem] lg:w-[32rem] "
 				/>
-				<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+				<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-montserrat text-white text-5xl">
 					<h1>{count}</h1>
 				</div>
 			</div>
 			{url && (
-				<section className='mt-5'>
-					<h2 className='font-montserrat'>Result:</h2>
+				<section className="mt-5">
+					<h2 className="font-montserrat">Result:</h2>
 					<Image
 						src={url}
 						width={200}
