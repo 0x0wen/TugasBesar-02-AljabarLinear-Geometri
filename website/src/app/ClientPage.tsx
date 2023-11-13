@@ -10,21 +10,23 @@ const ClientPage = () => {
 	const loadingHandler = () => {
 		setIsLoading(!isLoading)
 	}
-	const searchHandler = (data: {
+	const searchHandler = ({
+		parameter,
+		threshold,
+		file,
+	}: {
 		parameter: string
 		threshold: number
-		file: File
+		file: any
 	}) => {
-		console.log(data)
+		console.log(parameter)
+		console.log(threshold)
+		console.log(file)
 		setInputSubmitted(true)
 		setIsLoading(false)
 	}
-	async function searchHandlers(data: {
-		parameter: string
-		threshold: number
-		file: File
-	}) {
-		console.log(data.file, data.threshold, data.parameter)
+	async function searchHandlers(data: {parameter: string; threshold: number}) {
+		console.log(data.threshold, data.parameter)
 		const URL = process.env.NEXT_PUBLIC_VERCEL_URL
 			? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api`
 			: 'http://localhost:3000/api'

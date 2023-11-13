@@ -14,15 +14,18 @@ import Slider from '@mui/material/Slider'
 import MaterialUISwitch from './components/buttons/MaterialUISwitch'
 import {useState, useRef, useEffect} from 'react'
 import Camera from './Camera'
-const Input = ({
-	onSearch,
-}: {
-	onSearch: (data: {
+
+const Input = (
+	onSearch: ({
+		parameter,
+		threshold,
+		file,
+	}: {
 		parameter: string
 		threshold: number
-		file: File | null
+		file: any | null
 	}) => void
-}) => {
+) => {
 	const [selectedFile, setSelectedFile] = useState(null)
 	const [showCamera, setShowCamera] = useState(false)
 	const [threshold, setThreshold] = useState(60)
@@ -78,12 +81,13 @@ const Input = ({
 			{showCamera ? (
 				<Camera onSearch={handleSearchCamera} />
 			) : (
-				<div className="relative border-2 border-white aspect-[4/3] w-80 sm:w-96 md:w-[28rem] lg:w-[32rem] h-auto flex justify-center items-center">
+				<div className="relative border-2 border-color4 aspect-[4/3] w-80 sm:w-96 md:w-[28rem] lg:w-[32rem] h-auto flex justify-center items-center">
 					<Button
 						component="label"
 						variant="text"
 						className="w-full h-full "
 						startIcon={<CollectionsIcon />}
+						sx={{color: '#1EFF96'}}
 					>
 						<VisuallyHiddenInput
 							type="file"
@@ -103,7 +107,7 @@ const Input = ({
 				</div>
 			)}
 
-			<section className="flex flex-col gap-8 justify-center sm:place-content-between sm:py-2 ">
+			<section className="flex flex-col gap-8 justify-center sm:place-content-between sm:py-2 text-color5">
 				<section>
 					<h2 className="font-montserrat font-bold mb-2 md:mb-4">
 						Choose your method
@@ -111,10 +115,15 @@ const Input = ({
 					<section className="flex gap-4">
 						<Button
 							component="label"
-							variant={showCamera ? 'outlined' : 'contained'}
-							className="w-fit mx-auto"
+							variant={
+								showCamera
+									? 'outlined'
+									: 'contained bg-color3 hover:bg-color3  text-color1'
+							}
+							className="w-fit mx-auto border-none hover:border-color3"
 							startIcon={<FileUploadIcon />}
 							onClick={onCloseCamera}
+							sx={{color: '#1EFF96'}}
 						>
 							Upload file
 							<VisuallyHiddenInput
@@ -125,10 +134,15 @@ const Input = ({
 						</Button>
 						<Button
 							component="label"
-							variant={showCamera ? 'contained' : 'outlined'}
-							className="w-fit mx-auto"
+							variant={
+								showCamera
+									? 'contained bg-color3 hover:bg-color3  text-color1'
+									: 'outlined'
+							}
+							className="w-fit mx-auto border-none hover:border-color3"
 							startIcon={<PhotoCameraIcon />}
 							onClick={onOpenCamera}
+							sx={{color: '#1EFF96'}}
 						>
 							Take photo
 						</Button>
@@ -139,34 +153,54 @@ const Input = ({
 						direction="row"
 						spacing={1}
 						alignItems="center"
-						className="mx-auto"
+						className="mx-auto text-color5"
 					>
-						<Typography>Color</Typography>
+						<Typography
+							className={
+								checked
+									? 'font-montserrat text-color4'
+									: 'font-montserrat text-color5'
+							}
+						>
+							Color
+						</Typography>
 						<FormControlLabel
 							control={
 								<MaterialUISwitch checked={checked} onChange={checkHandler} />
 							}
 							label=""
 						/>
-						<Typography>Texture</Typography>
+						<Typography
+							className={
+								checked
+									? 'font-montserrat text-color5'
+									: 'font-montserrat text-color4'
+							}
+						>
+							Texture
+						</Typography>
 					</Stack>
-
 					<Box sx={{width: 250}}>
-						<Typography id="non-linear-slider" gutterBottom>
+						<Typography
+							id="non-linear-slider"
+							gutterBottom
+							className="text-color4"
+						>
 							Threshold: {threshold}%
 						</Typography>
 						<Slider
 							value={threshold}
-							min={10}
+							min={20}
 							step={1}
 							max={100}
 							onChange={thresholdHandler}
 							aria-labelledby="non-linear-slider"
+							sx={{color: '#1EFF96'}}
 						/>
 					</Box>
 					<Button
 						variant="outlined"
-						className="w-fit mx-auto"
+						className="w-fit mx-auto bg-color3 border-color3 hover:border-color3 text-color1 hover:bg-color3"
 						endIcon={<SearchIcon />}
 						type="submit"
 					>

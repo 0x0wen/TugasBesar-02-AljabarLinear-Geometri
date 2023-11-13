@@ -18,11 +18,11 @@ const config: Config = {
         montserrat:['Montserrat','sans-serif']
       },
       colors: {
-        color1: "#000000",
-        color2: "#666666",
-        color3: "#979797",
-        color4: "#eeeeee",
-        color5: "#0088cc",
+        color1: "#0A0A0A",
+        color2: "#101010",
+        color3: "#1EFF96",
+        color4: "#858486",
+        color5: "#FFFFFF",
       },
     },
   },

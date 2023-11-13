@@ -1,8 +1,6 @@
 'use client'
 import Button from '@mui/material/Button'
-import { styled } from '@mui/material'
-
-
+import {styled} from '@mui/material'
 const VisuallyHiddenInput = styled('input')({
 	clip: 'rect(0 0 0 0)',
 	clipPath: 'inset(50%)',
@@ -14,12 +12,17 @@ const VisuallyHiddenInput = styled('input')({
 	whiteSpace: 'nowrap',
 	width: 1,
 })
+
 const Dataset = () => {
 	return (
 		<>
 			{/* upload dataset section */}
 			<section className="mx-auto">
-				<Button component="label" variant="contained" className="w-fit mx-auto">
+				<Button
+					component="label"
+					variant="contained"
+					className="w-fit bg-color3 text-color1 hover:bg-color3"
+				>
 					Upload Dataset
 					<VisuallyHiddenInput type="file" />
 				</Button>

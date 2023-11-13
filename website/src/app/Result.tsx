@@ -18,11 +18,8 @@ const Result = ({
 	resultData: any
 }) => {
 	const [page, setPage] = useState(1)
-	const [isLoading, setIsLoading] = useState(false)
 	const itemsPerPage = 6
-	const loadingHandler = () => {
-		setIsLoading(!isLoading)
-	}
+
 	const handlePageChange = (
 		event: React.ChangeEvent<unknown>,
 		value: number
@@ -37,6 +34,12 @@ const Result = ({
 		{id: 5, image: car, percentage: 0.534},
 		{id: 6, image: car, percentage: 0.5456},
 		{id: 7, image: car, percentage: 0.5456},
+		{id: 5, image: car, percentage: 0.534},
+		{id: 6, image: car, percentage: 0.5456},
+		{id: 7, image: car, percentage: 0.5456},
+		{id: 5, image: car, percentage: 0.534},
+		{id: 6, image: car, percentage: 0.5456},
+		{id: 7, image: car, percentage: 0.5456},
 	]
 
 	const startIndex = (page - 1) * itemsPerPage
@@ -47,7 +50,7 @@ const Result = ({
 	return (
 		<section>
 			{/* result section */}
-			<section className="px-4 w-fit mx-auto flex flex-col gap-2 text-color1 font-montserrat shadow-md shadow-black p-5 rounded-xl">
+			<section className="px-4 w-fit mx-auto flex flex-col gap-2 text-color1 font-montserrat shadow-md bg-color1 p-5 rounded-xl">
 				<section>
 					{onLoading ? (
 						<Box sx={{width: '100%'}}>
@@ -55,20 +58,25 @@ const Result = ({
 						</Box>
 					) : (
 						<section className="flex justify-between font-montserrat lg:text-lg">
-							<p className="text-color5 font-extrabold">Result:</p>
-							<p className="text-color1">54 images in 0.57 seconds.</p>
+							<p className="text-color4 font-extrabold">Result:</p>
+							<p className="text-color4">54 images in 0.57 seconds.</p>
 						</section>
 					)}
 				</section>
 				<section className="grid grid-cols-2 md:grid-cols-3 gap-4 place-items-stretch w-fit mx-auto">
-					{currentItems.map((result) =>
+					{currentItems.map((result, index) =>
 						onLoading ? (
 							<Skeleton
 								variant="rectangular"
 								className="w-40 aspect-[4/3] h-auto sm:w-96"
+								key={index}
 							/>
 						) : (
-							<ResultCard image={result.image} percentage={result.percentage} />
+							<ResultCard
+								key={index}
+								image={result.image}
+								percentage={result.percentage}
+							/>
 						)
 					)}
 				</section>
@@ -97,6 +105,7 @@ const Result = ({
 							component="label"
 							variant="contained"
 							endIcon={<FileDownloadIcon />}
+							className='bg-color3 hover:bg-color3 text-color1'
 						>
 							Download
 						</Button>

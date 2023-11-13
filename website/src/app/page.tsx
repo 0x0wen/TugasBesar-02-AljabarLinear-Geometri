@@ -8,7 +8,7 @@ import Header from './Header'
 export default function Home() {
 	
 	return (
-		<main className="bg-color4 min-h-screen flex flex-col gap-8">
+		<main className="bg-color2 min-h-screen flex flex-col gap-8">
 			<Info />
 			<Header
 				title="lensa."
