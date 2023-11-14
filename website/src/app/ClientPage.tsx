@@ -24,6 +24,12 @@ const ClientPage = () => {
 		console.log(file)
 		setInputSubmitted(true)
 		setIsLoading(false)
+		setTimeout(() => {
+			window.scrollTo({
+				top: 800,
+				behavior: 'smooth',
+			})
+		}, 200)
 	}
 	async function searchHandlers(data: {parameter: string; threshold: number}) {
 		console.log(data.threshold, data.parameter)
@@ -54,7 +60,7 @@ const ClientPage = () => {
 			{inputSubmitted ? (
 				<Result onLoading={isLoading} resultData={result} />
 			) : (
-				<h3 className="mx-auto py-20 font-montserrat text-color2 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+				<h3 className="mx-auto py-20 font-montserrat text-color4 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
 					Result will be displayed here.
 				</h3>
 			)}

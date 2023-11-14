@@ -10,6 +10,7 @@ import {Button} from '@mui/material'
 import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import LoadingButton from '@mui/lab/LoadingButton'
 import car from '../../public/assets/car.jpg'
+import Reveal from './components/animations/Reveal'
 const Result = ({
 	onLoading,
 	resultData,
@@ -48,71 +49,73 @@ const Result = ({
 	const totalPages = Math.ceil(dataResult.length / itemsPerPage)
 
 	return (
-		<section>
-			{/* result section */}
-			<section className="px-4 w-fit mx-auto flex flex-col gap-2 text-color1 font-montserrat shadow-md bg-color1 p-5 rounded-xl">
-				<section>
-					{onLoading ? (
-						<Box sx={{width: '100%'}}>
-							<LinearProgress />
-						</Box>
-					) : (
-						<section className="flex justify-between font-montserrat lg:text-lg">
-							<p className="text-color4 font-extrabold">Result:</p>
-							<p className="text-color4">54 images in 0.57 seconds.</p>
-						</section>
-					)}
-				</section>
-				<section className="grid grid-cols-2 md:grid-cols-3 gap-4 place-items-stretch w-fit mx-auto">
-					{currentItems.map((result, index) =>
-						onLoading ? (
-							<Skeleton
-								variant="rectangular"
-								className="w-40 aspect-[4/3] h-auto sm:w-96"
-								key={index}
-							/>
+		<Reveal>
+			<section>
+				{/* result section */}
+				<section className="px-4 w-fit mx-auto flex flex-col gap-2 text-color1 font-montserrat shadow-md bg-color1 p-5 rounded-xl">
+					<section>
+						{onLoading ? (
+							<Box sx={{width: '100%', color: '#1EFF96'}}>
+								<LinearProgress color="inherit" />
+							</Box>
 						) : (
-							<ResultCard
-								key={index}
-								image={result.image}
-								percentage={result.percentage}
-							/>
-						)
-					)}
+							<section className="flex justify-between font-montserrat lg:text-lg">
+								<p className="text-color4 font-extrabold">Result:</p>
+								<p className="text-color4">54 images in 0.57 seconds.</p>
+							</section>
+						)}
+					</section>
+					<section className="grid grid-cols-2 md:grid-cols-3 gap-4 place-items-stretch w-fit mx-auto">
+						{currentItems.map((result, index) =>
+							onLoading ? (
+								<Skeleton
+									variant="rectangular"
+									className="w-40 aspect-[4/3] h-auto sm:w-72 md:w-60 lg:w-80 opacity-10 bg-opacity-30 bg-color3"
+									key={index}
+								/>
+							) : (
+								<ResultCard
+									key={index}
+									image={result.image}
+									percentage={result.percentage}
+								/>
+							)
+						)}
+					</section>
+					<h3 className="text-center">Treshold {'>'} % similarity</h3>
+					<Pagination
+						count={totalPages}
+						className="mx-auto"
+						size="large"
+						page={page}
+						onChange={handlePageChange}
+					/>
 				</section>
-				<h3 className="text-center">Treshold {'>'} % similarity</h3>
-				<Pagination
-					count={totalPages}
-					className="mx-auto"
-					size="large"
-					page={page}
-					onChange={handlePageChange}
-				/>
-			</section>
-			<div className="flex justify-center mt-14 mb-20">
-				{onLoading ? (
-					<LoadingButton
-						loading
-						loadingPosition="end"
-						endIcon={<FileDownloadIcon />}
-						variant="outlined"
-					>
-						download
-					</LoadingButton>
-				) : (
-					<Link href="/pdf">
-						<Button
-							component="label"
-							variant="contained"
+				<div className="flex justify-center mt-14 mb-20">
+					{onLoading ? (
+						<LoadingButton
+							loading
+							loadingPosition="end"
 							endIcon={<FileDownloadIcon />}
-							className='bg-color3 hover:bg-color3 text-color1'
+							variant="outlined"
 						>
-							Download
-						</Button>
-					</Link>
-				)}
-			</div>
-		</section>
+							download
+						</LoadingButton>
+					) : (
+						<Link href="/pdf">
+							<Button
+								component="label"
+								variant="contained"
+								endIcon={<FileDownloadIcon />}
+								className="bg-color3 hover:bg-color3 text-color1"
+							>
+								Download
+							</Button>
+						</Link>
+					)}
+				</div>
+			</section>
+		</Reveal>
 	)
 }
 

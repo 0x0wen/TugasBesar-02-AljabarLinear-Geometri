@@ -15,8 +15,8 @@ import MaterialUISwitch from './components/buttons/MaterialUISwitch'
 import {useState, useRef, useEffect} from 'react'
 import Camera from './Camera'
 
-const Input = (
-	onSearch: ({
+const Input = ({
+	onSearch = ({
 		parameter,
 		threshold,
 		file,
@@ -24,8 +24,8 @@ const Input = (
 		parameter: string
 		threshold: number
 		file: any | null
-	}) => void
-) => {
+	}) => {},
+}) => {
 	const [selectedFile, setSelectedFile] = useState(null)
 	const [showCamera, setShowCamera] = useState(false)
 	const [threshold, setThreshold] = useState(60)
@@ -97,7 +97,7 @@ const Input = (
 					</Button>
 					{selectedFile && (
 						<Image
-							src={imageURL}
+							src={imageURL ? imageURL : ''}
 							alt="Image preview"
 							width={400}
 							height={300}
@@ -115,12 +115,12 @@ const Input = (
 					<section className="flex gap-4">
 						<Button
 							component="label"
-							variant={
+							variant={showCamera ? 'outlined' : 'contained'}
+							className={
 								showCamera
-									? 'outlined'
-									: 'contained bg-color3 hover:bg-color3  text-color1'
+									? 'w-fit mx-auto border-none  hover:border-color3'
+									: 'bg-color3 hover:bg-color3 text-color1'
 							}
-							className="w-fit mx-auto border-none hover:border-color3"
 							startIcon={<FileUploadIcon />}
 							onClick={onCloseCamera}
 							sx={{color: '#1EFF96'}}
@@ -134,12 +134,12 @@ const Input = (
 						</Button>
 						<Button
 							component="label"
-							variant={
+							variant={showCamera ? 'contained' : 'outlined'}
+							className={
 								showCamera
-									? 'contained bg-color3 hover:bg-color3  text-color1'
-									: 'outlined'
+									? 'bg-color3 hover:bg-color3  text-color1'
+									: 'w-fit mx-auto border-none hover:border-color3'
 							}
-							className="w-fit mx-auto border-none hover:border-color3"
 							startIcon={<PhotoCameraIcon />}
 							onClick={onOpenCamera}
 							sx={{color: '#1EFF96'}}

@@ -4,9 +4,9 @@ import Result from './Result'
 import Dataset from './Dataset'
 import Info from './Info'
 import Header from './Header'
+import ClientPage from './ClientPage'
 
 export default function Home() {
-	
 	return (
 		<main className="bg-color2 min-h-screen flex flex-col gap-8">
 			<Info />
@@ -17,8 +17,7 @@ export default function Home() {
 					medical imaging to make retrieval more accurate."
 			/>
 			<Dataset />
-			<Input />
-			<Result />
+			<ClientPage />
 		</main>
 	)
 }
