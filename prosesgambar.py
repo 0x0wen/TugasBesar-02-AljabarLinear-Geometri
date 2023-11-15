@@ -1,35 +1,44 @@
 import cv2
 import os
 import warna
+import time
 
-# minimum cocok
+# minimum tingkat kecocokan
 minim = int(input("masukkan minimal tingkat kecocokan (dalam %): "))
 
-# Membaca gambar dari file
-gambar1 = cv2.imread('ayam.jpeg')
-list_h1,list_s1,list_v1 = warna.CBIR_Warna(gambar1)
+start1_time = time.time()
 
-path = "D:\\Kuliah\\Semester 3\\Algeo\\Tubes2\\Github\\TugasBesar-Algeo-2\\ayam"
+# Membaca gambar dari file
+gambar1 = cv2.imread('cek\\0.jpg')
+gambar1_resized = cv2.resize(gambar1, (0, 0) , fx = 0.5 , fy = 0.5)
+H1,S1,V1 = warna.histHSV(gambar1_resized)
+
+path = "D:\\Kuliah\\Semester 3\\Algeo\\TUBES2_ALGEO\\Github\\TugasBesar-Algeo-2\\cek"
 daftar_file = os.listdir(path)
 
-# Mengakses fitur warna dari setiap piksel
+# Mengolah gambar dari RGB ke HSV
 sim = []
 for nama_file in daftar_file:
-    gambar2 = cv2.imread(os.path.join(path, nama_file))
-    list_h2,list_s2,list_v2 = warna.CBIR_Warna(gambar2)
-
-    sim1 = warna.similarity(list_h1,list_h2)
-    sim2 = warna.similarity(list_s1,list_s2)
-    sim3 = warna.similarity(list_v1,list_v2)
+    start_time = time.time()
     
-    cossim1 = ((sim1 + sim2 + sim3) / 3) * 100
-    sim.append(cossim1)
+    gambar2 = cv2.imread(os.path.join(path, nama_file))
+    gambar2_resized = cv2.resize(gambar2, (0, 0) , fx = 0.5 ,fy = 0.5)
+    H2,S2,V2 = warna.histHSV(gambar2_resized)
 
-#mencetak hasil
-simsort = sorted(sim, reverse = True)
-for i in range (len(sim)):
+    sim.append((warna.similarity(H1,H2) + warna.similarity(S1,S2) + warna.similarity(V1,V2))/3 *100 )
+    
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Waktu eksekusi:{elapsed_time:.2f}detik")
+
+#Print hasil compare
+simsort = sorted(sim,reverse=True)
+for i in range (len(sim)-1,-1,-1):
     if (simsort[i] < minim):
             break
     for j in range (len(sim)):
         if (simsort[i] == sim[j]):  
-            print(f"Tingkat kecocokan ke-{i+1} adalah dengan gambar ke {j+1} atau file yang beranama {daftar_file[j]} dengan persentase = {simsort[i]:.2f}%") 
+            print(f"Tingkat kecocokan ke-{i+1} adalah dengan gambar ke {j+1} atau file yang bernama {daftar_file[j]} dengan persentase = {simsort[i]:.2f}%") 
+end_time = time.time()
+elapsed_time = end_time - start1_time
+print(f"Waktu eksekusi:{elapsed_time:.2f}detik")
