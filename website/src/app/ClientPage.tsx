@@ -31,23 +31,38 @@ const ClientPage = () => {
 			})
 		}, 200)
 	}
-	async function searchHandlers(data: {parameter: string; threshold: number}) {
-		console.log(data.threshold, data.parameter)
+	async function searchHandlers(data: {
+		parameter: string
+		threshold: number
+		file: any
+	}) {
+		console.log(data.threshold, data.parameter, data.file)
 		const URL = process.env.NEXT_PUBLIC_VERCEL_URL
 			? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api`
 			: 'http://localhost:3000/api'
+
 		try {
-			const input = {
-				threshold: data.threshold,
-				parameter: data.parameter,
-				file: data.file,
-			}
-			const response = await fetch(`${URL}/input`, {
+			setInputSubmitted(true)
+			setIsLoading(false)
+			setTimeout(() => {
+				window.scrollTo({
+					top: 800,
+					behavior: 'smooth',
+				})
+			}, 200)
+			const formData = new FormData()
+			formData.append('threshold', data.threshold.toString())
+			formData.append('parameter', data.parameter)
+			formData.append('file', data.file)
+			const response = await fetch(`${URL}/query`, {
 				method: 'POST',
-				headers: {'Content-Type': 'application/json'},
-				body: JSON.stringify(input),
+				body: formData,
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
 			})
 			const resData = await response.json()
+			console.log(resData)
 		} catch {
 			console.error('Error sending query!')
 		} finally {

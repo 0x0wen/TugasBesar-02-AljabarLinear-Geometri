@@ -66,7 +66,7 @@ const Input = ({
 	}
 	const handleSearch = (e: any) => {
 		e.preventDefault()
-		onSearch({parameter, threshold, selectedFile})
+		onSearch({parameter, threshold, file: selectedFile})
 	}
 	const handleSearchCamera = (image: any) => {
 		setSelectedFile(image)
@@ -78,7 +78,7 @@ const Input = ({
 		<form
 			ref={formRef}
 			onSubmit={handleSearch}
-			className=" text-center w-fit mx-auto flex flex-wrap justify-center  gap-4 md:gap-8 lg:gap-20 m-4 p-4 rounded-xl text-color1 shadow-md shadow-color5"
+			className=" text-center w-fit mx-auto flex flex-wrap justify-center gap-4 md:gap-8 lg:gap-20 m-4 p-4 rounded-xl text-color1 shadow-md shadow-color5"
 		>
 			{showCamera ? (
 				<Camera onSearch={handleSearchCamera} />
@@ -88,7 +88,7 @@ const Input = ({
 						component="label"
 						variant="text"
 						className="w-full h-full "
-						startIcon={<CollectionsIcon />}
+						startIcon={selectedFile ? <></> : <CollectionsIcon />}
 						sx={{color: '#1EFF96'}}
 					>
 						<VisuallyHiddenInput
