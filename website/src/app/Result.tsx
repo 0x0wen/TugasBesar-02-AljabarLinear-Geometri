@@ -11,6 +11,7 @@ import FileDownloadIcon from '@mui/icons-material/FileDownload'
 import LoadingButton from '@mui/lab/LoadingButton'
 import car from '../../public/assets/car.jpg'
 import Reveal from './components/animations/Reveal'
+import RevealWithBG from './components/animations/RevealWithBG'
 const Result = ({
 	onLoading,
 	resultData,
@@ -52,7 +53,7 @@ const Result = ({
 		<Reveal>
 			<section>
 				{/* result section */}
-				<section className="px-4 w-fit mx-auto flex flex-col gap-2 text-color1 font-montserrat shadow-md bg-color1 p-5 rounded-xl">
+				<section className="px-4 w-fit mx-auto flex flex-col gap-2 text-color1 font-montserrat shadow-md shadow-color5 bg-color1 p-5 rounded-xl">
 					<section>
 						{onLoading ? (
 							<Box sx={{width: '100%', color: '#1EFF96'}}>
@@ -60,8 +61,12 @@ const Result = ({
 							</Box>
 						) : (
 							<section className="flex justify-between font-montserrat lg:text-lg">
-								<p className="text-color4 font-extrabold">Result:</p>
-								<p className="text-color4">54 images in 0.57 seconds.</p>
+								<RevealWithBG>
+									<p className="text-color4 font-extrabold">Result:{60}</p>
+								</RevealWithBG>
+								<RevealWithBG>
+									<p className="text-color4">54 images in 0.57 seconds.</p>
+								</RevealWithBG>
 							</section>
 						)}
 					</section>
@@ -82,10 +87,9 @@ const Result = ({
 							)
 						)}
 					</section>
-					<h3 className="text-center">Treshold {'>'} % similarity</h3>
 					<Pagination
 						count={totalPages}
-						className="mx-auto"
+						className="mx-auto bg-color3 rounded-full mt-5 md:mt-10"
 						size="large"
 						page={page}
 						onChange={handlePageChange}
