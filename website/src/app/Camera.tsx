@@ -10,7 +10,7 @@ const videoConstraints = {
 const Camera = ({onSearch}: {onSearch: (image: any) => void}) => {
 	const webcamRef = useRef(null)
 	const [url, setUrl] = useState(null)
-	const [count, setCount] = useState(15)
+	const [count, setCount] = useState(5)
 
 	function base64ToBlob(base64String: string, contentType = '') {
 		const byteCharacters = atob(base64String)
@@ -31,16 +31,17 @@ const Camera = ({onSearch}: {onSearch: (image: any) => void}) => {
 
 	const capturePhoto = useCallback(async () => {
 		const imageSrc = webcamRef.current.getScreenshot()
-		const blob = base64ToBlob(imageSrc, 'image/webp') // Specify the image format
+		const base64Image = imageSrc.replace(/^data:image\/webp;base64,/, '')
+		const blob = base64ToBlob(base64Image, 'image/webp') // Specify the image format
 		const file = blobToFile(blob, 'taken_by_webcam.webp') // Specify the file name
-		onSearch(file)
 		setUrl(imageSrc)
+		onSearch(file)
 	}, [webcamRef])
 	useEffect(() => {
 		// Check if the count is zero, and if so, call the onComplete callback
 		if (count === 0) {
 			capturePhoto()
-			setCount(15)
+			setCount(5)
 		} else {
 			// Decrease the count by 1 every second
 			const timer = setTimeout(() => {

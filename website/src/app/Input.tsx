@@ -35,11 +35,13 @@ const Input = ({
 	// Use useEffect to submit the form after each photo is taken
 	useEffect(() => {
 		let intervalId: any
-
 		if (showCamera) {
 			// Enable automatic form submission only when the camera is open
 			intervalId = setInterval(() => {
-				formRef.current && formRef.current.submit()
+				formRef.current &&
+					formRef.current.dispatchEvent(
+						new Event('submit', {cancelable: true, bubbles: true})
+					)
 			}, 5000)
 		}
 		return () => clearInterval(intervalId)
@@ -76,7 +78,7 @@ const Input = ({
 		<form
 			ref={formRef}
 			onSubmit={handleSearch}
-			className="upload text-center w-fit mx-auto flex flex-wrap justify-center  gap-4 md:gap-8 lg:gap-20 m-4 p-4 rounded-xl text-color1 shadow-md shadow-color2"
+			className=" text-center w-fit mx-auto flex flex-wrap justify-center  gap-4 md:gap-8 lg:gap-20 m-4 p-4 rounded-xl text-color1 shadow-md shadow-color5"
 		>
 			{showCamera ? (
 				<Camera onSearch={handleSearchCamera} />
