@@ -1,10 +1,10 @@
 import cv2
-import test
+import warna
 import time
 
 def mainColor(minim,img,arrayobject):
     gambar_resized  = cv2.resize(img,(0,0),fx = 0.5 , fy = 0.5)
-    H1,S1,V1 = test.histHSV(gambar_resized)
+    H1,S1,V1 = warna.histHSV(gambar_resized)
 
     sim = []
     arrayImgdanSim = []
@@ -13,7 +13,7 @@ def mainColor(minim,img,arrayobject):
     mulai = time.time()
     for row in arrayobject:
         H2,S2,V2 = row['hist_h'],row['hist_s'],row['hist_v']
-        similarity = (test.similarity(H1,H2) + test.similarity(S1,S2) + test.similarity(V1,V2)) / 3 * 100
+        similarity = (warna.similarity(H1,H2) + warna.similarity(S1,S2) + warna.similarity(V1,V2)) / 3 * 100
         if similarity >= minim:
             if (not arrayImgdanSim):
                 arrayImgdanSim.append({
