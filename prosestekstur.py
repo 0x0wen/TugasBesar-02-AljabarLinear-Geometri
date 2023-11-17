@@ -2,28 +2,25 @@ import tekstur
 import os
 import cv2
 import csv
-import time
+import numpy as np
+import base64
 
-def ubahArrayGambarMenjadiListCooc(path):
+def ubahArrayGambarMenjadiListCooc(file_contents: bytes):
+    nparr = np.frombuffer(file_contents, np.uint8)
+    ArrayGambar = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     arrayobjects = []
-    ArrayGambar = os.listdir(path)
-    i = 1
-    mulai = time.time()
     for image in ArrayGambar:
-        compared_image = cv2.imread(os.path.join(path, image))
-        image_resize = cv2.resize(compared_image, (0,0), fx = 0.5, fy = 0.5)
+        image_resize = cv2.resize(image, (0,0), fx = 0.5, fy = 0.5)
         contrast, entropy, homogeneity = tekstur.calculate_texture_features(image_resize)
+        _, buffer = cv2.imencode('.jpg', image)
+        img_base64 = base64.b64encode(buffer).decode("utf-8")
         arrayobjects.append({
-            "image": image_resize,
+            "image": img_base64,
             "contrast": contrast,
             "entropy": entropy,
             "homogeneity": homogeneity,
         })
-        print(f'gambar {i} sudah jadi')
-        i+=1
-    selesai = time.time()
-    selisih = selesai - mulai
-    print(f'waktu :{selisih}')
+
     return arrayobjects
 
 def buatFile(arrayobjects):
