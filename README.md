@@ -1,8 +1,18 @@
-# TugasBesar-Algeo-2
+![squad](./src/website/public/assets/fotoLegendaris.jpg)
+# Tugas Besar 2 IF2123 Aljabar Linear dan Geometri 2023
 
 Content-Based Information Retrival (CBIR) Implementation on a Website with NextJS and FastAPI
 
-## How to Use?
+## Developers
+> "ordinary people with extraordinary curiosity"
+
+|   NIM    |          Nama          |         Hobi         |
+| :------: | :--------------------: | :------------------: |
+| 13522131 |  Owen Tobias Sinurat   |      Dukung MU       |
+| 13522155 |  Axel Santadi Warih  | Bukan Mandi |
+| 13522142 | Farhan Raditya Aji |   Makan Gudeg    |
+
+## How to Run?
 
 ### FrontEnd  
 1. Open a terminal on the repository folder 
