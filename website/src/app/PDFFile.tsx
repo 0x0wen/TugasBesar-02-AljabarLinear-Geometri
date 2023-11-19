@@ -31,9 +31,11 @@ const styles = StyleSheet.create({
 	resultImage: {
 		marginVertical: 15,
 		marginHorizontal: 100,
-		width: 200,
+		minWidth: 100,
 		minHeight: 100,
 		objectFit: 'contain',
+		maxHeight: 100,
+		maxWidth: 100,
 	},
 	description: {
 		fontSize: 12,
