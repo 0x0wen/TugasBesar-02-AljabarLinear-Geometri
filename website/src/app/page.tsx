@@ -1,6 +1,3 @@
-import Pagination from '@mui/material/Pagination'
-import Input from './Input'
-import Result from './Result'
 import Dataset from './Dataset'
 import Info from './Info'
 import Header from './Header'
