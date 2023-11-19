@@ -2,9 +2,9 @@ from fastapi import FastAPI, File, Form,UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 import uvicorn
-from .colorCBIR import colorCBIR
-from .textureCBIR import textureCBIR
-from .datasetProcessor import datasetFeatureExtractor
+from colorCBIR import colorCBIR
+from textureCBIR import textureCBIR
+from datasetProcessor import datasetFeatureExtractor
 
 app = FastAPI(docs_url="/api/docs", openapi_url="/api/openapi.json")
 
@@ -21,12 +21,12 @@ texture_dataset= []
 
 
 
-@app.get("/api/healthchecker")
+@app.get("/healthchecker")
 def healthchecker():
     return {"status": "success", "message": "yes no Framework with Next.js"}
 
 
-@app.post("/api/dataset")
+@app.post("/dataset")
 async def process_images(files: List[UploadFile] = File(...)):
     global color_dataset
     global texture_dataset
@@ -37,7 +37,7 @@ async def process_images(files: List[UploadFile] = File(...)):
         print(f"Error: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
     
-@app.post("/api/query")
+@app.post("/query")
 async def query(threshold: str = Form(...),parameter : str = Form(...), file: UploadFile = File(...) ):
     global color_dataset
     global texture_dataset

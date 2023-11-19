@@ -25,15 +25,12 @@ const Dataset = () => {
 		setIsLoading(true)
 		document.body.style.overflow = 'hidden'
 		setDataset(event.target.files)
-		const URL = process.env.NEXT_PUBLIC_VERCEL_URL
-			? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api`
-			: 'http://localhost:3000/api'
 		try {
 			const formData = new FormData()
 			for (let i = 0; i < event.target.files.length; i++) {
 				formData.append('files', event.target.files[i])
 			}
-			const response = await fetch(`${URL}/dataset`, {
+			const response = await fetch(`http://127.0.0.1:8000/dataset/`, {
 				method: 'POST',
 				body: formData,
 			})

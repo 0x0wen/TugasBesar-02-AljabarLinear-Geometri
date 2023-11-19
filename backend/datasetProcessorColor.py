@@ -1,5 +1,5 @@
 import base64
-from .colorProcessor import histHSV
+from colorProcessor import histHSV
 import numpy as np
 import cv2
 

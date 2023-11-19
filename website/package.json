@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "fastapi-dev": "pip3 install -r requirements.txt && python3 -m uvicorn api.index:app --reload",
-    "next-dev": "next dev",
-    "dev": "concurrently \"npm run next-dev\" \"npm run fastapi-dev\""
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@mui/icons-material": "^5.14.16",
     "@mui/lab": "^5.0.0-alpha.151",
+    "@mui/material": "^5.14.18",
     "@react-pdf/renderer": "^3.1.14",
+    "concurrently": "^8.2.2",
     "framer-motion": "^10.16.4",
     "next": "14.0.1",
     "react": "^18",

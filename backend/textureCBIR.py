@@ -1,5 +1,5 @@
 import cv2
-from .textureProcessor import cosine_similarity,calculate_texture_features
+from textureProcessor import cosine_similarity,calculate_texture_features
 import time
 import numpy as np
 

@@ -1,4 +1,4 @@
-from .textureProcessor import calculate_texture_features
+from textureProcessor import calculate_texture_features
 import os
 import cv2
 import asyncio

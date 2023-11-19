@@ -20,7 +20,7 @@ const Result = ({
 }: {
 	onLoading: boolean
 	resultData: any
-	time: number,
+	time: number
 	queryImage: any
 }) => {
 	const [page, setPage] = useState(1)
@@ -66,7 +66,7 @@ const Result = ({
 								</section>
 							)}
 						</section>
-						<section className="grid grid-cols-2 md:grid-cols-3 gap-4 place-items-stretch w-fit mx-auto">
+						<section className="grid grid-rows-3 grid-cols-2 md:grid-rows-2 md:grid-cols-3 gap-4 place-items-stretch w-fit mx-auto">
 							{currentItems.map((result: any, index: number) =>
 								onLoading ? (
 									<Skeleton
@@ -103,7 +103,13 @@ const Result = ({
 							</LoadingButton>
 						) : (
 							<PDFDownloadLink
-								document={<PDFFile resultData={resultData} time={time} queryImage={queryImage}/>}
+								document={
+									<PDFFile
+										resultData={resultData}
+										time={time}
+										queryImage={queryImage}
+									/>
+								}
 								fileName="result.pdf"
 							>
 								<Button

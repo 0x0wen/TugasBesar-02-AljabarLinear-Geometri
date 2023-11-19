@@ -1,11 +1,11 @@
 import base64
-from .colorProcessor import histHSV
+from colorProcessor import histHSV
 import numpy as np
 import cv2
 import cv2
 import numpy as np
 import base64
-from .textureProcessor import calculate_texture_features
+from textureProcessor import calculate_texture_features
 async def datasetFeatureExtractor(arr):
     colorArray = []
     textureArray = []

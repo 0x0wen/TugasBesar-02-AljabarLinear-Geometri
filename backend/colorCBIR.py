@@ -1,5 +1,5 @@
 import cv2
-from .colorProcessor import histHSV,similarity
+from colorProcessor import histHSV,similarity
 import time
 import numpy as np
 

@@ -20,9 +20,6 @@ const ClientPage = () => {
 		const queryImage = URL.createObjectURL(data.file)
 		setImageURL(queryImage)
 		setIsLoading(true)
-		const path = process.env.NEXT_PUBLIC_VERCEL_URL
-			? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/api`
-			: 'http://localhost:3000/api'
 
 		try {
 			setInputSubmitted(true)
@@ -36,10 +33,11 @@ const ClientPage = () => {
 			formData.append('threshold', data.threshold.toString())
 			formData.append('parameter', data.parameter)
 			formData.append('file', data.file)
-			const response = await fetch(`${path}/query`, {
+			const response = await fetch(`http://127.0.0.1:8000/query/`, {
 				method: 'POST',
 				body: formData,
 			})
+
 			const resData = await response.json()
 			setResult(resData.result)
 			setTime(resData.time)
