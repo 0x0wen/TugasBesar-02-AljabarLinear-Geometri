@@ -1,45 +1,41 @@
 # TugasBesar-Algeo-2
 
-Selamat datang di proyek ini!.  
-Proyek ini merupakan Aplikasi Aljabar Vektor dalam Sistem Temu Balik Gambar
+Content-Based Information Retrival (CBIR) Implementation on a Website with NextJS and FastAPI
 
-## Tata Cara Penggunaan
+## How to Use?
 
 ### FrontEnd  
-1. Buka terminal  
-2. Pindah ke direktori website dengan mengetikkan perintah berikut dan tekan Enter  
+1. Open a terminal on the repository folder 
+2. Change to the website directory:
 ```
-cd website
+cd src/website
 ``` 
-3. Install semua dependensi dengan mengetikkan perintah berikut dan tekan Enter  
+3. Install all required dependencies:  
 ```
 npm i
 ```
-4. Setelah instalasi selesai, jalankan aplikasi dengan mengetikkan perintah berikut dan tekan Enter:  
+4. After installing all dependencies, run the website:  
 ```
 npm run dev
 ```
-5. Tunggu hingga proses selesai dan terminal berhenti
+5. Open localhost:3000 on your browser
   
-6. Buka browser dan ketikkan "localhost:3000" di address bar.
+6. Wait for a couple of seconds until the website loads
 
 ### BackEnd  
-1. Buka terminal  
-2. Pindah ke direktori backend dengan mengetikkan perintah berikut dan tekan Enter  
+1. Open another terminal on the repository folder   
+2. Change to the backend directory:
 ```
-cd backend
+cd src/backend
 ```
-3. Install semua dependensi Python dengan mengetikkan perintah berikut dan tekan Enter  
+3. Install all required dependencies:
 ```
 pip install -r requirements.txt
 ```
-4. Setelah instalasi selesai, jalankan server dengan mengetikkan perintah berikut dan tekan Enter  
+4.  After installing all dependencies, run the backend server:
 ```
-python3 -m uvicorn main:app --reload
+python3 -m uvicorn index:app --reload
 ```
 
-Dengan langkah-langkah di atas, aplikasi FrontEnd dan BackEnd akan berjalan dengan lancar. Pastikan Anda telah mengikuti semua langkah dengan benar untuk memastikan kinerja yang optimal. Jika ada pertanyaan atau masalah, jangan ragu untuk menghubungi tim pengembang. Terima kasih telah menggunakan aplikasi ini!
-
-
-
-
+After correctly following all the steps, you can use the website to see the CBIR implementation. 
+Instructions on the features is provided on the website.
