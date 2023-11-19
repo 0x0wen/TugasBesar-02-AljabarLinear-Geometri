@@ -9,7 +9,7 @@ Content-Based Information Retrival (CBIR) Implementation on a Website with NextJ
 |   NIM    |          Nama          |         Hobi         |
 | :------: | :--------------------: | :------------------: |
 | 13522131 |  Owen Tobias Sinurat   |      Dukung MU       |
-| 13522155 |  Axel Santadi Warih  | Bukan Mandi |
+| 13522155 |  Axel Santadi Warih  | Sawer Waifu |
 | 13522142 | Farhan Raditya Aji |   Makan Gudeg    |
 
 ## How to Run?
