@@ -3,10 +3,10 @@ import IconButton from '@mui/material/IconButton'
 import HelpIcon from '@mui/icons-material/Help'
 import CancelIcon from '@mui/icons-material/Cancel'
 import {useState, useEffect} from 'react'
-import RevealStagger from './components/animations/RevealStagger'
 import RevealWithBG from './components/animations/RevealWithBG'
-import Divider from '@mui/material/Divider'
-import Link from 'next/link'
+import fotoLegenda from '../../public/assets/fotoLegendaris.jpg'
+import Image from 'next/image'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
 const InfoModal = ({style}: {style: string}) => {
 	return (
 		<div
@@ -111,11 +111,20 @@ const InfoModal = ({style}: {style: string}) => {
 				</ol>
 			</section>
 
-			<section className="text-center flex flex-wrap justify-center">
+			<section className="text-center grid grid-cols-1 place-items-center justify-center">
 				<RevealWithBG>
 					<h1 className="font-anton  text-4xl mb-4 drop-shadow-2xl">
 						About the creators
 					</h1>
+				</RevealWithBG>
+				<RevealWithBG>
+					<div className="flex justify-center">
+						<Image
+							src={fotoLegenda}
+							alt="foto legenda"
+							className="w-96 mb-5 md:w-[30rem] lg:w-[35rem]"
+						/>
+					</div>
 				</RevealWithBG>
 				<RevealWithBG>
 					<p className="font-montserrat  px-5 sm:px-10 md:px-14 lg:px-64 text-justify">
@@ -123,6 +132,63 @@ const InfoModal = ({style}: {style: string}) => {
 						Bandung Institute of Technology. We made this website to fulfill the
 						Linear Algebra and Geometry project.
 					</p>
+				</RevealWithBG>
+				<RevealWithBG>
+					<section className="my-5">
+						<ul className="flex flex-wrap gap-8">
+							<li>
+								<a
+									href="https://www.linkedin.com/in/owen-tobias-sinurat-99b6b1203"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex justify-center items-center gap-2"
+								>
+									<p className="text-white font-montserrat font-bold">
+										Owen Tobias Sinurat
+									</p>
+									<LinkedInIcon
+										fontSize="inherit"
+										sx={{scale: '2:hover', color: '#1EFF96'}}
+										className="w-8 h-auto aspect-square"
+									/>
+								</a>
+							</li>
+							<li>
+								<a
+									href="https://www.linkedin.com/in/axel-santadi-6726292a0"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex justify-center items-center gap-2"
+								>
+									<p className="text-white font-montserrat font-bold">
+										Axel Santadi Warih
+									</p>
+									<LinkedInIcon
+										fontSize="inherit"
+										sx={{scale: '2:hover', color: '#1EFF96'}}
+										className="w-8 h-auto aspect-square"
+									/>
+								</a>
+							</li>
+							<li>
+								<a
+									href="https://www.linkedin.com/in/farhan-raditya-b807272a0"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="flex justify-center items-center gap-2"
+								>
+									<p className="text-white font-montserrat font-bold">
+										Farhan Raditya Aji
+									</p>
+									<LinkedInIcon
+										fontSize="inherit"
+										sx={{scale: '2:hover', color: '#1EFF96'}}
+										className="w-8 h-auto aspect-square"
+									/>
+								</a>
+							</li>
+						</ul>
+					</section>
 				</RevealWithBG>
 			</section>
 		</div>
